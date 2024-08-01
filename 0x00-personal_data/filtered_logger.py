@@ -2,12 +2,14 @@
 """ logging module
 """
 import re
+from typing import List
 
 
-def filter_datum(fields: [str], redaction: str, message: str,
+def filter_datum(fields: List[str], redaction: str, message: str,
                  separator: str) -> str:
     """loging with regex
     """
-    result = re.sub(rf'({"|".join(fields)})=[^{separator}]*',
-                    lambda m: f"{m.group(1)}={redaction}", message)
+    for field in fields:
+        result = re.sub(field+'=.*?'+separator,
+                        field+'='+redaction+separator, message)
     return result
