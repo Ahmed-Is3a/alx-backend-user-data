@@ -4,7 +4,8 @@
 import re
 
 
-def filter_datum(fields, redaction, message, separator):
+def filter_datum(fields: [str], redaction: str, message: str,
+                 separator: str) -> str:
     """loging with regex
     """
     result = re.sub(rf'({"|".join(fields)})=[^{separator}]*',
